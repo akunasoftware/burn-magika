@@ -1,0 +1,9 @@
+[package]
+name = "magika-burn-tests"
+version.workspace = true
+edition.workspace = true
+publish = false
+
+[dev-dependencies]
+magika = "*"
+magika-burn = { path = "../magika-burn" }

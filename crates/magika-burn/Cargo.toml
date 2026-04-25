@@ -1,0 +1,8 @@
+[package]
+name = "magika-burn"
+version.workspace = true
+edition.workspace = true
+description = "Portable, runtime-agnostic Magika inference scaffolding"
+license.workspace = true
+
+[dependencies]
