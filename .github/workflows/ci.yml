@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Show devshell toolchain
+        run: nix develop -c rustc --version
+
+      - name: Refresh vendored assets and fixtures
+        run: nix develop -c bash ./scripts/update_vendor.sh
+
+      - name: Run check script
+        run: nix develop -c bash ./scripts/check.sh

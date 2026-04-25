@@ -1,0 +1,31 @@
+[package]
+name = "akuna-infer"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+description = "Magika file-type detection with Burn"
+repository = "https://github.com/akunasoftware/akuna-infer"
+homepage = "https://github.com/akunasoftware/akuna-infer"
+documentation = "https://docs.rs/akuna-infer"
+readme = "README.md"
+
+[dependencies]
+burn = { version = "0.21.0-pre.3", default-features = false, features = ["std"] }
+ndarray = "0.17.2"
+onnx-ir = "0.21.0-pre.3"
+protobuf = "3.7.2"
+serde = { version = "1.0.228", features = ["derive"], optional = true }
+
+[dev-dependencies]
+criterion = "0.5.1"
+magika = "1.1.0"
+ort = { version = "=2.0.0-rc.12", default-features = false, features = ["download-binaries", "tls-rustls"] }
+burn-cpu = { version = "0.21.0-pre.3", default-features = false, features = ["std"] }
+burn-wgpu = { version = "0.21.0-pre.3", default-features = false, features = ["std", "webgpu"] }
+
+[[bench]]
+name = "inference"
+harness = false
+
+[features]
+serde = ["dep:serde"]
