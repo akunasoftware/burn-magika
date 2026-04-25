@@ -1,0 +1,182 @@
+﻿# Meditations - Selected Passages
+
+
+By Marcus Aurelius
+
+
+Public-domain source text:
+Project Gutenberg, `Meditations of the Emperor Marcus Aurelius Antoninus`
+https://www.gutenberg.org/files/55317/55317-h/55317-h.htm
+
+
+Translation note:
+George W. Chrystal's 1902 rendering, based on the Foulis translation of 1742.
+
+
+This file is a manually curated, sectional markdown excerpt for extraction and
+formatting tests.
+
+
+## Book II
+
+
+### On Meeting Difficult People
+
+
+> Say this to yourself in the morninsg: Today I shall have to do with meddlers,
+> with the ungrateful, with the insolent, with the crafty, with the envious and
+> the selfish.
+>
+> All these vices have beset them, because they know not what is good and what
+> is evil.
+>
+> I cannot be angry with my brother, or sever myself from him, for we are made
+> by nature for mutual assistance, like the feet, the hands, the eyelids, the
+> upper and lower rows of teeth.
+
+
+Source: section 1
+
+
+### On Action and Character
+
+
+> Hourly and earnestly strive, as a Roman and a man, to do what falls to your
+> hand with perfect unaffected dignity, with kindliness, freedom and justice,
+> and free your soul from every other imagination.
+>
+> This you will accomplish if you perform each action as if it were your last,
+> without wilfulness, or any passionate aversion to what reason approves;
+> without hypocrisy or selfishness, or discontent with the decrees of
+> Providence.
+
+
+Source: section 5
+
+
+### On Focusing Your Mind
+
+
+> Cares from without distract you: take leisure, then, to add some good thing
+> to your knowledge; have done with vacillation, and avoid the other error.
+>
+> For triflers, too, are they who, by their activities, weary themselves in
+> life, and have no settled aim to which they may direct, once and for all,
+> their every desire and project.
+
+
+Source: section 7
+
+
+### On Looking Inward
+
+
+> Seldom are any found unhappy from not observing what is in the minds of
+> others.
+>
+> But such as observe not well the stirrings of their own souls must of
+> necessity be unhappy.
+
+
+Source: section 8
+
+
+### On Mortality
+
+
+> The duration of man's life is but an instant; his substance is fleeting, his
+> senses dull; the structure of his body corruptible; the soul but a vortex.
+>
+> In fine, the life of the body is but a river, and the life of the soul a
+> misty dream.
+>
+> Existence is a warfare, and a journey in a strange land; and the end of fame
+> is to be forgotten.
+
+
+Source: section 17
+
+
+### On Philosophy
+
+
+> What then avails to guide us? One thing, and one alone-Philosophy.
+>
+> And this consists in keeping the divinity within inviolate and intact;
+> victorious over pain and pleasure; free from temerity, free from falsehood,
+> free from hypocrisy; independent of what others do or fail to do.
+
+
+Source: section 17
+
+
+## Book III
+
+
+### On the Present Moment
+
+
+> Remember also that every man lives only this present moment, which is a
+> fleeting instant: the rest of time is either spent or quite unknown.
+>
+> Short is the time which each of us has to live, and small the corner of the
+> earth he has to live in.
+
+
+Source: section 10
+
+
+## Book IV
+
+
+### On Simplicity
+
+
+> Let no action be done at random, nor otherwise than in complete accordance
+> with the principles involved.
+
+
+Source: section 2
+
+
+### On Retreat Within Yourself
+
+
+> Men seek retirement in the country, on the sea-coast, in the mountains; and
+> you too have frequent longings for such distractions.
+>
+> Yet surely this is great folly, since you may retire into yourself at any
+> hour you please.
+>
+> Nowhere can a man find any retreat more quiet and more full of leisure than
+> in his own soul.
+
+
+Source: section 3
+
+
+### On Pain and Judgment
+
+
+> Suppress the thought; and the cry "I am hurt!" is gone.
+>
+> Suppress "I am hurt!" and you suppress the injury.
+
+
+Source: section 7
+
+
+### On Changing Your Mind
+
+
+> For two things be ever ready: First, to do that only which reason, the
+> sovereign and legislative faculty, suggests for the good of mankind:
+> Secondly, to change your course on meeting any one who can correct and alter
+> your opinion.
+>
+> But let the change be made because you really believe it to be in the
+> interest of justice or the public good, or such like, and not with any view
+> to pleasure or glory for yourself.
+
+
+Source: section 12

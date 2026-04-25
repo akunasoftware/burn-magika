@@ -1,0 +1,23 @@
+[package]
+name = "magika-burn"
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+description = "Magika file-type detection with Burn"
+
+[dependencies]
+burn = { version = "0.21.0-pre.3", default-features = false, features = ["std"] }
+burn-backend = "0.21.0-pre.3"
+burn-cpu = { version = "0.21.0-pre.3", default-features = false, features = ["std"] }
+burn-wgpu = { version = "0.21.0-pre.3", default-features = false, features = ["std", "webgpu"] }
+onnx-ir = "0.21.0-pre.3"
+protobuf = "3.7.2"
+
+[dev-dependencies]
+criterion = "0.5.1"
+magika = "*"
+ort = { version = "=2.0.0-rc.12", default-features = false, features = ["download-binaries", "tls-rustls"] }
+
+[[bench]]
+name = "inference"
+harness = false
