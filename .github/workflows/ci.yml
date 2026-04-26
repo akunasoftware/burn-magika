@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Restore/build Cargo cache
+        uses: Swatinem/rust-cache@v2
+
+      - name: Install cargo-deny
+        uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-deny
+
+      - name: Run formatting, linting, checks, and tests
+        run: ./scripts/check.sh

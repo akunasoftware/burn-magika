@@ -344,17 +344,23 @@ impl<B: Backend<FloatElem = f32, IntElem = i64>> MagikaModel<B> {
         &self,
         batch_features: &[Vec<i32>],
     ) -> Result<Vec<Vec<f32>>, MagikaInferenceError> {
-        let mut out = Vec::with_capacity(batch_features.len());
+        let probs = self.forward(batch_features)?;
+        let flat = probs
+            .into_data()
+            .to_vec::<f32>()
+            .map_err(|err| MagikaInferenceError::Runtime(format!("extract tensor data: {err}")))?;
 
-        for features in batch_features {
-            let probs = self.forward(std::slice::from_ref(features))?;
-            let flat = probs.into_data().to_vec::<f32>().map_err(|err| {
-                MagikaInferenceError::Runtime(format!("extract tensor data: {err}"))
-            })?;
-            out.push(flat);
+        if flat.len() != batch_features.len() * DENSE_OUT {
+            return Err(MagikaInferenceError::Runtime(format!(
+                "unexpected probability output size: {}",
+                flat.len()
+            )));
         }
 
-        Ok(out)
+        Ok(flat
+            .chunks_exact(DENSE_OUT)
+            .map(|row| row.to_vec())
+            .collect::<Vec<_>>())
     }
 
     fn row_to_detection(&self, row: Vec<f32>) -> Result<Detection, MagikaInferenceError> {
@@ -506,17 +512,33 @@ fn read_f32_tensor(
         )));
     }
 
-    let values = tensor
-        .raw_data
-        .chunks_exact(4)
-        .map(|chunk| f32::from_le_bytes(chunk.try_into().expect("f32 chunk")))
-        .collect::<Vec<_>>();
+    let expected_values = expected_shape.iter().product::<usize>();
+    let values = if !tensor.raw_data.is_empty() {
+        if tensor.raw_data.len() % 4 != 0 {
+            return Err(MagikaInferenceError::Runtime(format!(
+                "initializer {name} raw_data byte count {} is not divisible by 4",
+                tensor.raw_data.len()
+            )));
+        }
 
-    if values.len() != expected_shape.iter().product::<usize>() {
+        tensor
+            .raw_data
+            .chunks_exact(4)
+            .map(|chunk| f32::from_le_bytes(chunk.try_into().expect("f32 chunk")))
+            .collect::<Vec<_>>()
+    } else if !tensor.float_data.is_empty() {
+        tensor.float_data.to_vec()
+    } else {
+        return Err(MagikaInferenceError::Runtime(format!(
+            "initializer {name} does not contain raw_data or float_data"
+        )));
+    };
+
+    if values.len() != expected_values {
         return Err(MagikaInferenceError::Runtime(format!(
             "initializer {name} has {} values, expected {}",
             values.len(),
-            expected_shape.iter().product::<usize>()
+            expected_values
         )));
     }
 
