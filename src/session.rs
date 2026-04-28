@@ -8,7 +8,7 @@ pub struct Session<B: Backend> {
     model: MagikaModel<B>,
 }
 
-impl<B: Backend<FloatElem = f32, IntElem = i64>> Session<B> {
+impl<B: Backend<FloatElem = f32>> Session<B> {
     pub fn new(device: &B::Device) -> Result<Self, Error> {
         let model = MagikaModel::<B>::from_embedded(device)?;
         Ok(Self { model })

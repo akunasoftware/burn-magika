@@ -10,22 +10,21 @@ use burn_wgpu::{Wgpu, WgpuDevice};
 
 #[test]
 fn parity_against_rust_magika_on_repo_fixtures_cpu() {
-    let classifier =
-        MagikaModel::<Cpu<f32, i64>>::from_embedded(&CpuDevice).expect("build cpu classifier");
+    let classifier = MagikaModel::<Cpu>::from_embedded(&CpuDevice).expect("build cpu classifier");
     assert_parity_against_rust_magika(&classifier);
 }
 
 #[test]
 fn parity_against_rust_magika_on_repo_fixtures_wgpu() {
-    let classifier = MagikaModel::<Wgpu<f32, i64>>::from_embedded(&WgpuDevice::default())
-        .expect("build wgpu classifier");
+    let classifier =
+        MagikaModel::<Wgpu>::from_embedded(&WgpuDevice::default()).expect("build wgpu classifier");
 
     assert_parity_against_rust_magika(&classifier);
 }
 
 fn assert_parity_against_rust_magika<B>(classifier: &MagikaModel<B>)
 where
-    B: Backend<FloatElem = f32, IntElem = i64>,
+    B: Backend<FloatElem = f32>,
 {
     let fixture_files = tests::fixture_files();
 

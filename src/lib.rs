@@ -8,7 +8,7 @@
 //!
 //! fn main() -> Result<(), Box<dyn std::error::Error>> {
 //!     let device = WgpuDevice::default();
-//!     let mut session = Session::<Wgpu<f32, i64>>::new(&device)?;
+//!     let mut session = Session::<Wgpu>::new(&device)?;
 //!
 //!     let detected = session.identify_content_sync(b"fn main() { println!(\"hi\"); }")?;
 //!     println!("{} {}", detected.info().label, detected.info().mime_type);

@@ -132,7 +132,7 @@ pub struct MagikaModel<B: Backend> {
     dense_bias: Tensor<B, 2>,
 }
 
-impl<B: Backend<FloatElem = f32, IntElem = i64>> MagikaModel<B> {
+impl<B: Backend<FloatElem = f32>> MagikaModel<B> {
     pub fn from_embedded(device: &B::Device) -> Result<Self, MagikaInferenceError> {
         Self::from_bytes(device, EMBEDDED_MODEL)
     }
@@ -498,7 +498,7 @@ impl<B: Backend<FloatElem = f32, IntElem = i64>> MagikaModel<B> {
     }
 }
 
-fn tensor_2d_from_flat<B: Backend<FloatElem = f32, IntElem = i64>>(
+fn tensor_2d_from_flat<B: Backend<FloatElem = f32>>(
     device: &B::Device,
     values: Vec<f32>,
     shape: [usize; 2],
@@ -509,7 +509,7 @@ fn tensor_2d_from_flat<B: Backend<FloatElem = f32, IntElem = i64>>(
     ))
 }
 
-fn tensor_1d_from_flat<B: Backend<FloatElem = f32, IntElem = i64>>(
+fn tensor_1d_from_flat<B: Backend<FloatElem = f32>>(
     device: &B::Device,
     values: Vec<f32>,
 ) -> Result<Tensor<B, 1>, MagikaInferenceError> {
@@ -538,7 +538,7 @@ fn read_conv_weight(
     Ok(flattened)
 }
 
-fn tensor_3d_from_flat<B: Backend<FloatElem = f32, IntElem = i64>>(
+fn tensor_3d_from_flat<B: Backend<FloatElem = f32>>(
     device: &B::Device,
     values: Vec<f32>,
     shape: [usize; 3],
@@ -549,7 +549,7 @@ fn tensor_3d_from_flat<B: Backend<FloatElem = f32, IntElem = i64>>(
     ))
 }
 
-fn tensor_3d<B: Backend<FloatElem = f32, IntElem = i64>>(
+fn tensor_3d<B: Backend<FloatElem = f32>>(
     device: &B::Device,
     initializers: &HashMap<&str, &TensorProto>,
     spec: &TensorSpec,
@@ -613,15 +613,13 @@ fn read_f32_tensor(
     Ok(values)
 }
 
-fn gelu<B: Backend<FloatElem = f32, IntElem = i64>, const D: usize>(
-    x: Tensor<B, D>,
-) -> Tensor<B, D> {
+fn gelu<B: Backend<FloatElem = f32>, const D: usize>(x: Tensor<B, D>) -> Tensor<B, D> {
     let cubic = x.clone() * x.clone() * x.clone();
     let inner = (x.clone() + cubic * 0.044_715) * 0.797_884_6;
     x * ((inner.tanh() + 1.0) * 0.5)
 }
 
-fn layer_norm_axis_1_3d<B: Backend<FloatElem = f32, IntElem = i64>>(
+fn layer_norm_axis_1_3d<B: Backend<FloatElem = f32>>(
     x: Tensor<B, 3>,
     axis_len: f32,
     weight: Tensor<B, 3>,
@@ -635,7 +633,7 @@ fn layer_norm_axis_1_3d<B: Backend<FloatElem = f32, IntElem = i64>>(
 }
 
 #[allow(dead_code)]
-fn layer_norm_axis_1_2d<B: Backend<FloatElem = f32, IntElem = i64>>(
+fn layer_norm_axis_1_2d<B: Backend<FloatElem = f32>>(
     x: Tensor<B, 2>,
     axis_len: f32,
     weight: Tensor<B, 2>,
@@ -687,8 +685,7 @@ mod tests {
 
     #[test]
     fn classifier_batch_is_deterministic() {
-        let classifier =
-            MagikaModel::<Cpu<f32, i64>>::from_embedded(&CpuDevice).expect("build classifier");
+        let classifier = MagikaModel::<Cpu>::from_embedded(&CpuDevice).expect("build classifier");
 
         let a = classifier
             .detect_bytes(b"abcdef")
@@ -706,12 +703,12 @@ mod tests {
 
     #[test]
     fn embedded_model_builds() {
-        MagikaModel::<Cpu<f32, i64>>::from_embedded(&CpuDevice).expect("build embedded model");
+        MagikaModel::<Cpu>::from_embedded(&CpuDevice).expect("build embedded model");
     }
 
     #[test]
     fn explicit_top_k_is_applied() {
-        let classifier = MagikaModel::<Cpu<f32, i64>>::from_embedded(&CpuDevice)
+        let classifier = MagikaModel::<Cpu>::from_embedded(&CpuDevice)
             .expect("build model")
             .with_top_k(5);
 

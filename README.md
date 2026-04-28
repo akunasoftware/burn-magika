@@ -13,7 +13,7 @@ use std::path::Path;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let device = WgpuDevice::default();
-    let mut session = Session::<Wgpu<f32, i64>>::new(&device)?;
+    let mut session = Session::<Wgpu>::new(&device)?;
 
     let detected = session.identify_file_sync(Path::new("fixtures/text.pdf"))?;
     assert_eq!(detected.info().label, "pdf");

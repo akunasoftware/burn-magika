@@ -14,8 +14,7 @@ fn benchmark_inference(c: &mut Criterion) {
         .map(|path| fs::read(path).expect("read fixture"))
         .collect::<Vec<_>>();
 
-    let classifier =
-        MagikaModel::<Cpu<f32, i64>>::from_embedded(&CpuDevice).expect("build classifier");
+    let classifier = MagikaModel::<Cpu>::from_embedded(&CpuDevice).expect("build classifier");
 
     let first = fixture_bytes.first().expect("at least one fixture").clone();
     c.bench_function("detect_bytes_single", |b| {
